@@ -1,23 +1,25 @@
+import re, bcrypt
 from django.db import models
 
 # Create your models here.
 class UserManager(models.Manager):
     def validate(self, postData):
         errors = {}
-        if postData['submit'] == 'create':
-            if postData['name'] <= 3:
+        if postData['form'] == 'create':
+            if len(postData['name']) <= 3:
                 errors["name"] = 'Name must be at least 3 characters long'
-            if postData['email']:
+            EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+            if not EMAIL_REGEX.match(postData['email']):
                 errors['email'] = 'Invalid email'
             if len(postData['number']) != 10:
                 errors['number'] = 'Invalid phone number'
-            if postData['pword'] < 8:
+            if len(postData['pword']) < 8:
                 errors['pword'] = 'Password must be at least 8 characters'
             return errors
         else:
-            if User.objects.get['email'] != postData['name']:
+            if not User.objects.get(email = postData['email']):
                 errors['email'] = "User does not exist"
-            if User.objects.get['pword'] != postData['pword']:
+            if not bcrypt.checkpw(postData['pword'].encode(), User.objects.get(email = postData['email']).password.encode()):
                 errors['pword'] = "Incorrect password"
             return errors
 class User(models.Model):

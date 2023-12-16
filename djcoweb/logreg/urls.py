@@ -4,6 +4,8 @@ from . import views
 app_name = "logreg"
 
 urlpatterns = [
-    path("/", views.logreg),
-    path("dashboard", views.dashboard)
+    path("", views.logreg),
+    path("validate", views.validate),
+    path("dashboard", views.dashboard),
+    path("logout", views.logout)
 ]
