@@ -1,0 +1,19 @@
+<h1>Products</h1>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+{% for product in products %}
+    <h2>{{product.name}}</h2>
+    <h2>Description: {{product.description}}</h2>
+    <h2>Price: {{product.price}}</h2>
+    <h2>Quantity: {{product.quantity}}</h2>
+    <button><a href= "add/{{product.id}}">Add</a></button>
+    <button><a href="remove/{{product.id}} "  {{product.id}}  "remove %}">Remove</a></button>
+{% endfor %}

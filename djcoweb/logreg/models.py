@@ -11,14 +11,17 @@ class UserManager(models.Manager):
             EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
             if not EMAIL_REGEX.match(postData['email']):
                 errors['email'] = 'Invalid email'
+            if User.objects.filter(email = postData['email']):
+                errors['email'] = "Already have an existing account"
             if len(postData['number']) != 10:
                 errors['number'] = 'Invalid phone number'
             if len(postData['pword']) < 8:
                 errors['pword'] = 'Password must be at least 8 characters'
             return errors
         else:
-            if not User.objects.get(email = postData['email']):
+            if not User.objects.filter(email = postData['email']):
                 errors['email'] = "User does not exist"
+                return errors
             if not bcrypt.checkpw(postData['pword'].encode(), User.objects.get(email = postData['email']).password.encode()):
                 errors['pword'] = "Incorrect password"
             return errors
