@@ -10,46 +10,48 @@ def about(request):
 def products(request):
     return render(request, "estore/inventory.html", {"products":Inventory.objects.all()})
 
-def modify_cart(request, action, product_id):
-    inventory = Inventory.objects.get(id = product_id)
+def modify_cart(request, action, productid):
+    inventory = Inventory.objects.get(id = productid)
     #Should change name to email for user access
     this_user = User.objects.get(name = request.session["name"])
-    this_cart = Cart.objects.filter(user = this_user).last()
+    this_cart = Cart.objects.get_or_create(total = 0, user = this_user)
+    this_product = Product.objects.get_or_create(product_id = productid, quantity = 0)
     
-    if not this_cart:
-        Cart.objects.create(total = 0, user = this_user, products = Product.objects.create(product_id = product_id, quantity = 0))
-    
-    this_product = Product.objects.filter(product_id = product_id).last()
+    request.session["cart"] = this_cart[0].id
+    print(this_cart)    
+    print(this_product)
     
     #Add to Cart
     if action == "add":
         if not inventory.quantity > 0:
             messages.error(request, "Out of stock")
-            return redirect(request, "products")
+            return redirect("/estore/products")
         inventory.quantity -= 1
         inventory.save()
-        if this_cart.products:
-            this_product.quantity += 1
+        if this_cart[0].products:
+            this_product[0].quantity += 1
         else:
-            this_product.quantity = 1
-        this_product.save()
-        this_cart.products.add(this_product)
-        return redirect(request, "products")
+            this_product[0].quantity = 1
+        this_product[0].save()
+        this_cart[0].products.add(this_product[0])
+        return redirect("/estore/products")
     
     #Remove from Cart
     else:
-        if not this_cart.products.get(this_product):
+        if not this_cart[0].products.get(this_product[0]):
             messages.error(request, "Insufficient amount")
-            return redirect(request, "products")
-        this_product.quantity -= 1
-        this_product.save()
-        if this_product.quantity < 1:
-            this_cart.objects.delete(products = this_product)
-            return redirect(request, "products")
+            return redirect("/estore/products")
+        this_product[0].quantity -= 1
+        this_product[0].save()
+        if this_product[0].quantity < 1:
+            print(this_product[0].quantity)
+            this_product[0].delete()
+            return redirect("/estore/products")
         else:
             inventory.quantity += 1
             inventory.save()
-            return redirect(request, "products")
+            print(inventory.quantity)
+            return redirect("/estore/products")
 
 def cart(request):
     return render(request, "estore/cart.html")

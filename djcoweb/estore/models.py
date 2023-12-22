@@ -12,7 +12,6 @@ class Product(models.Model):
     product_id = models.IntegerField()
     quantity = models.IntegerField()
 
-
 class Cart(models.Model):
     user = models.ForeignKey(User, related_name = "carts", on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, related_name = "carts")

@@ -3,6 +3,8 @@ from django.http import HttpResponse, request
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from . models import User
+from estore.models import Cart
+
 
 # Create your views here.
 def logreg(request):
