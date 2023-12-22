@@ -3,6 +3,7 @@ from django.http import HttpResponse, request
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from . models import User
+from estore.models import Cart
 
 # Create your views here.
 def logreg(request):
@@ -14,10 +15,10 @@ def validate(request):
             messages.error(request, value)
         return redirect('/')
     if request.POST['form'] == 'create':
-        User.objects.create(name=request.POST['name'], email=request.POST['email'], number=request.POST['number'], password=bcrypt.hashpw(request.POST['pword'].encode(), bcrypt.gensalt()).decode())
-        request.session['name'] = request.POST['name']
-    else:
-        request.session['name'] = User.objects.get(email = request.POST['email']).name
+        user = User.objects.create(name=request.POST['name'], email=request.POST['email'], number=request.POST['number'], password=bcrypt.hashpw(request.POST['pword'].encode(), bcrypt.gensalt()).decode())
+        Cart.objects.create(user = user, total = 0)
+    request.session['name'] = User.objects.get(email = request.POST['email']).name
+    request.session['cart_id'] = Cart.objects.filter(user = User.objects.get(name = request.session["name"])).last().id
     return redirect('/dashboard')
 def dashboard(request):
     return render(request, "logreg/dashboard.html")
