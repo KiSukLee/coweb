@@ -8,12 +8,18 @@
 </ul>
 {% endif %}
 
+<nav>
+    <h2><a href="/estore/about">About</a></h2>
+    <h2><a href="/estore/products">Products</a></h2>
+    <h2><a href="/estore/cart">Cart</a></h2>
+    <h2><a href="/logout">Logout</a></h3></h2>
+</nav>
 
 {% for product in products %}
-    <h2>{{product.name}}</h2>
-    <h2>Description: {{product.description}}</h2>
-    <h2>Price: {{product.price}}</h2>
-    <h2>Quantity: {{product.quantity}}</h2>
+    <h3>{{product.name}}</h3>
+    <h3>Description: {{product.description}}</h3>
+    <h3>Price: {{product.price}}</h3>
+    <h3>Quantity: {{product.quantity}}</h3>
     <button><a href= "add/{{product.id}}">Add</a></button>
     <button><a href="remove/{{product.id}} "  {{product.id}}  "remove %}">Remove</a></button>
 {% endfor %}

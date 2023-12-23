@@ -8,6 +8,9 @@ class Inventory(models.Model):
     price = models.DecimalField(decimal_places = 2, max_digits = 4)
     quantity = models.IntegerField()
 
+    def __str__(self):
+        return self.name
+    
 class Product(models.Model):
     product_id = models.IntegerField()
     quantity = models.IntegerField()
@@ -17,3 +20,6 @@ class Cart(models.Model):
     user = models.ForeignKey(User, related_name = "carts", on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, related_name = "carts")
     total = models.DecimalField(decimal_places = 2, max_digits = 7)
+
+    def __str__(self):
+        return self.user.name + str(self.id)
