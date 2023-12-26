@@ -1,0 +1,24 @@
+<html>
+<body>
+    <h1>Cart</h1>
+    <nav>
+        <h2><a href="/estore/about">About</a></h2>
+        <h2><a href="/estore/products">Products</a></h2>
+        <h2><a href="/logout">Logout</a></h2>
+    </nav>
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% for prod in prods %}
+        <h3>{{prod.name}} {{prod.price}} x {{prod.quantity}}</h3>
+        <button><a href= "cart/add/{{prod.prod_id}}">Add</a></button>
+        <button><a href="cart/remove/{{prod.prod_id}}">Remove</a></button>
+    {% endfor %}
+    <h2>Total: {{total}}</h2>
+    <h2><a href="/estore/checkout">Proceed to Checkout</a></h2>
+</body>
+</html>
