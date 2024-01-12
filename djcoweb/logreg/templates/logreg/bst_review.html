@@ -1,0 +1,622 @@
+<!--Bootstrap-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Login/Registration</title>
+        
+        <link rel="stylesheet" href="">
+        <!-- load Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body>
+        <!--.container-fluid makes element use entire width of viewport-->
+        <!--.rows are wrappers for columns-->
+        <!--.col-4 indicates user wants to use 4 columns out of the 12 possible-->
+        <!--.col-sm indicates that the breakpoint that applies to media queries for small and larger devices 
+            should be used to determine column size and spacing-->
+        <!--.col-{breakpoint}-auto sizes columns based on natural width of their content-->
+        <!--.w-100 (width: 100%) can be used to break to a new line between columns-->
+        <!--to change gutters pair negative margin utility on .rows with 
+            matching padding utilities on .cols (ex. row mx (horizontal margin)-lg-n5(negative 5))
+            (ex. col py-3 px-lg-5)-->
+        <!--.row-cols-* quickly sets the number of columns best to render content and layout
+            (ex. row row-cols-4 ) (ex. row row-cols-1 row-cols-sm-2) <= chooses option that best fits situation-->
+        
+        <!--Alignment-->
+        <!--.row align-items-(start/center/end) vice versa for .col with self instead of items
+            vertically aligns content-->
+        <!--.row justify-content-(start/center/end/around/between) horizontally aligns contents-->
+        <!--.order-(1-12) (.order-first/last) controlls visual order of content-->
+        <!--.offset-(breakpoint)-* moves columns over by specified number of columns
+            when adding multiple breakpoints, need to reset offsets
+            (ex. col-sm-5 offset-sm-2 col-md-6 offset-md-0)--->
+        <!--.m(r/l)-auto margin utility that moves sibling columns away from one another-->
+
+        <!--Color-->
+        <!--.text/.bg -(primary, secondary, success, danger, etc.)-->
+        
+        <!--Size-->
+        <!--.display-(1-4)-->
+
+        <div class="container-fluid bg-secondary">
+            <div class="row align-items-center justify-content-center">
+                <div class="text-center display-4 text-primary bg-success">New Member</div>
+                <form class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2" action= "validate" method='post'>
+                    {% csrf_token %}
+                    <div class="col">Name: <input type="text" name="name"></div>
+                    <div class="col">Email: <input type="text" name="email"></div>
+                    <div class="col">Number: <input type="int" name="number"></div>
+                    <div class="col">Password: <input type="text" name="pword"></div>
+                    <input type="hidden" name="form" value="create">
+                    <div class="w-100"></div>
+                    <button class="col offset-sm-4 btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <!--Image-->
+        <!--.img-fluid makes images responsive-->
+        <!--.img-thumbnail give image a rounded 1px border-->
+        <!--rounded float-(left/right)-->
+
+        <!--Table-->
+        <!--.table-(light/dark) (same for thead)-->
+        <!--.table-striped adds zebra-striping (ex. table table-striped)-->
+        <!--.table-(bordered/borderless) adds/removes border on all sides of table and cells-->
+        <!--.table-hover enables hover state on table rows within table body-->
+        <!--.table-sm makes tables more compact by reducing cell padding by half-->
+        <!--can color table rows or cells using same color classes used for text-->
+        <!--<caption> functions like a heading for a table-->
+        <!--.table-responsive-(breakpoints) allows tables to be scrolled horizontally up until specified breakpoint
+        (ex. <div class="table-responsive"><table class="table">)-->
+        
+        <!--Alerts-->
+        <!--<div class="alert alert-(primary, secondary, success, etc.)" role="alert"> for styling-->
+        <!--can add additional html elements within (ex. headings, paragraphs, etc.)-->
+        <!--for dismissing, need to have either an alert plugin or compiled Bootstrap Javascript loaded-->
+        <!--<div class="alert-dismissible fade show" role="alert">
+            <Button type="button" class="close" data-dismiss="alert" aria-label="close">-->
+        
+        <!--Badge-->
+        <!--badges scale to match the size of immediate parent element and 
+            give a hover and focus states when used on the <a> element-->
+        <!--badge badge-(primary, secondary, etc.)-->
+        <!--badge badge-pill gives more rounded appearance-->
+
+        <!--Breadcrumb-->
+        <!--indicates current page's location within navigational hierarchy-->
+        <!--ex. <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Home
+        -->
+
+        <!--Button-->
+        <!--btn btn-(primary, secondary, link etc.)-->
+        <!--can use button classes on non-button elements (ex. a, input)-->
+        <!--btn btn-outline-(primary, etc.) to only add color to outline of buttons-->
+        <!--btn btn-(sm/lg) for different sizes-->
+        <!--btn btn-block block spans full width of parent-->
+        <!--class="btn active" aria-pressed="true" buttons will appear pressed when active-->
+        <!--add disabled boolean attribute in the button element outside the class
+            for <a> elements: class="btn disabled" tabindex="-1" role="button" aria-disabled="true"-->
+        <!--data-toggle="button" aria-pressed="false" use to toggle button's active state-->
+        <!--checkbox and radio buttons (checked state is only updated via click event)-->
+            <div class="btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                    <input type="checkbox" checked> Checked
+            <div class="btn-group" role="group" aria-label="" to wrap a group of buttons-->
+            <div class="btn-toolbar" role="toolbar" aria-label=""to combine sets of button groups-->
+        <!--btn-group-(sm/md/lg) can change size of button group-->
+        <!--can nest button groups to create dropdown menus with series of buttons-->
+            <div class="btn-group" role="group" aria-label="">
+                <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="">
+        <!--btn-group-vertical to make button group vertically stack-->
+        
+        <!--Card-->
+        
+        <div class="row row-cols-1 row-cols-md-2">
+        <div class="card-columns"> <!--cards included inside are stacked from top to bottom and left to right-->
+            <div class="card-(group/deck (set of equal cards that are not attached)) w-75 h-100 text-(center/right) text-white (bg/border)-(primary,etc.)" style="width: 18rem;">
+                <div class="row no-gutters"> <!--for horizontal layout-->
+                    <div class="col-md-4"> <!--==^-->
+                        <img src="" class="card-img-top" alt=""> <!--put line of code on bottom to place img on bottom-->
+                    </div>
+                    <div class="card-header">Featured</div>
+                    <div class="card-img-overlay"></div>
+                    <ul class="nav nav-(tabs/pills) card-header-(tabs/pills)">
+                        <li class="nav-item">
+                            <a class="nav-link (active/disabled tabindex=-1 aria-disabled=true)"></a>
+                        </li>
+                    </ul>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card Title</h5>
+                            <h6 class="card-subtitle">Card Subtitle</h6>
+                            <p class="card-text"></p>
+                            <a href="" class="btn btn-primary">Go somewhere</a>
+                            <a href="" class="card-link">Card Link</a>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"></li>
+                    </ul>
+                    <blockquote class="blockquote">
+                        <p></p>
+                        <footer class="blockquote-footer">someone in <cite title=""></cite></footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    
+        <!--Carousel (slideshow component for cycling through elements like a carousel)-->
+
+        <div id="need specific id if using multiple slides" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="carousel_id" data-slide-to="0" class="active"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active (need to set one of the elements active or nothing will show on slide)" data-interval="changes amount of time to delay inbetween">
+                    <img src="" class="d-block w-100 (prevents browser default image alignment)" alt="">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>First slide label</h5>
+                        <p>...</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-(prev/next)" href="carousel_id" role="button" data-slide="(prev/next)">
+                <span class="carousel-control-(prev/next)-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous/Next</span>
+            </a>
+        </div>
+
+        <!--Collapse-->
+
+        <a class="btn btn-primary" data-toggle="collapse" href="collapse_id/(.multi-collapse/#multi-collapse_id)" role="button" aria-expanded="false" aria-controls="collapse_id/(multi_collapse1 multi_collapse2)"></a>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="collapse_id" aria-expanded="false" aria-controls="collapse_id"></button>
+        <div class="collapse multi-collapse" id="collapse_id">
+            ...
+        </div>
+
+        <!--Accordion-->
+
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2>
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="collapse_id" aria-expanded="true" aria-controls="collapse_id"></button>
+                    </h2>
+                <div id="collapse_id" class="collapse show" aria-labelledby="headingOne" data-parent="accordionExample">
+
+                </div>
+                <div class="card-header" id="headingTwo">
+                    <h2>        
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="collapse_id2" aria-expanded="false" aria-controls="collase_id2"></button>
+                    </h2>
+                <div id="collapse_id2" class="collapse" aria-labelledby="headingTwo" data-parent="accordionExample">
+
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Dropdowns-->
+        <!--Split button (provides more spacing for dropdowns that are centered around the split button)-->
+        
+        <div class="btn-group (dropup/left/right)">
+            <button type="button" class="btn btn-danger btn-(lg/sm)">Action</button>
+            <button type="button" id="dropdownMenu" class="btn btn=danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="x,y">
+                <span class="sr-only" (visible only to screen readers)>Toggle Dropdown</span>
+            </button>
+            
+            <!--if right aligned by default by left aligned past a certain breakpoint add:-->
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-(breakpoint)-left"></div>
+            
+            <div class="dropdown-menu (dropdown-menu-(breakpoints)-right: aligns menu to right side of its parent at a certain breakpoint)" aria-labelledby="dropdownMenu">
+                <h6 class="dropdown-header">Dropdown Header</h6>
+                <span class="dropdown-item-text">Dropdown item text</span>
+                <a class="dropdown-item disabled" href="" tabindex="-1" aria-disabled="true">Disabled link</a>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item active" type="button">Active button</button>
+                
+                <!--Form-->
+                <form>
+                    <div class="form-group">
+                        <label for="exampleDropdownFormEmail1">Email address</label>
+                        <input type="email" class="forl-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                            <label class="form-check-label" for="dropdownCheck"></label>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+        
+        <!--Forms-->
+
+        <!--Use form grid (class="row/col") for complex forms that require multiple columns, varied widths, and extra alignment-->
+        <form class="form-inline"> <!--Inline puts contained elements in a row if possible-->
+            <fieldset disabled></fieldset> <!--can add fieldset to disable all input fields within except for checkboxes (MUST include disabled attribute in input)-->
+            <div class="form-group">
+                <label for="exampleInputEmail">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">small help message</small>
+            </div>
+            <div class="form-group form-check (form-check-inline)"> <!--can group checkboxes or radios in same row-->
+                <!--use .position-static for inputs that do not have labels-->
+                <input type="(checkbox/radio)" class="form-check-input (position-static)" (name="exampleRadio") id="exampleCheck" disabled>
+                <label class="form-check-label" for="exampleCheck">Check me out</label>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile">Example file input</label>
+                <input type="file" class="form-control-file" id="exampleFormControlFile">
+            </div>
+            <div class="form-group row">
+                <div class="col-(num/auto)">
+                    <input type="text" class="form-control form-control-(sm/lg)" placeholder="Type info here">
+                </div>
+                <!--Readonly prevents modification of input's value-->
+                <input type="text" class="form-control" placeholder="readonly" readonly>
+                <!--Readonly element styled as plain text-->
+                <label for="staticEmail" class="col-sm-2 col-form-label-(sm/lg)"></label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                </div>
+            </div>
+            <div class="form-group"> <!--horizontally scrollable range input-->
+                <label for="formControlRange">Example range input</label>
+                <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="formControlRange">
+            </div>
+            <!--Custom Forms-->
+            <div class="custom-control custom-(checkbox/radio/switch/file) (custom-control-inline)">
+                <input type="checkbox/radio" class="custom-control-input" (name="radio") id="custom" disabled>
+                <label class="custom-control-label" for="custom"></label>
+                <select class="custom-select" size="num of options shown" multiple> <!--multiple shows all options available-->
+                    <option selected>Open select menu</option>
+                    <option value="1">One</option>
+                </select>
+                <!--Range-->
+                <input type="range" class="custom-range" ...>
+                <!--File-->
+                <input type="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose File</label>
+            </div>
+        <!--Validation-->
+        <form class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="" class="form-control is-(in)valid" ...>
+                <div class="(in)valid-feedback ((in)valid-tooltip)">
+                    message
+                </div>
+            </div>
+        </form>
+
+        <!--Input groups-->
+        <form>
+            <div class="input-group input-group-(sm/lg) (flex-nowrap)"> <!--can disable default wrapping used to accomodate custom form field validation-->
+                <div class="input-group-(pre/ap)pend">
+                    <button class="btn btn-outline-secondary" type="button" id="">Button</button>
+                    <span class="input-group-text" id="">...</span>
+                    <div class="input-group-text">
+                        <input type="checkbox/radio" aria-label="">
+                    </div>
+                    <!--Multiple inputs-->
+                    <!--validation styles are only available for groups with a single input-->
+                    <input type="text" aria-label="" class="form-control">
+                    <input type="text" aria-label="" class="form-control">
+                </div>
+            </div>
+        </form>
+
+        <!--Jumbotron--> 
+        <!--a way of styling featured content or information-->
+        <div class="jumbotron (jumbotron-fluid)"> <!--full width without rounded corners-->
+            <div class="container"> <!--need .container for jumbotron-fluid-->
+                
+            </div>
+        </div>
+
+        <!--List group-->
+        <ul class="list-group (list-group-(flush/horizontal-(breakpoints))) "> <!--flush removes borders and rounded corners of parent container-->
+            <li class="list-group-item (disabled/active) list-group-item-(primary, etc.)">object</li> <!--add to indicate current selection is active/disabled-->
+            <a href="" class="list-group-item list-group-item-action (active/disabled)"></a>
+            <button type="button" class="list-group-item list-group-item (active)" disabled></button> 
+            <!--Badge-->
+            <li class="list-group-item">
+                <span class="badge"></span>
+            </li>
+        </ul>
+        <!--Tabbable panes w/ JS plugin-->
+        <div class="row">
+            <div class="col-4">
+                <div class="list-group" id="" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="" role="tab" aria-control="">
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="tab-content" id="">
+                    <div class="tab-pane fade show active" id="" role="tabpanel" aria-labelledby="">...</div>
+                </div>
+            </div>
+        </div>
+
+        <!--Media object-->
+        <!--used to build complex and repetitive components-->
+        <ul class="list-unstyled">
+            <li class="media">
+            <div class="media">
+                <img src="" class="align-self-(start/center/end)" alt="">
+                <div class="media-body">
+                    ...
+                </div>
+            </div>
+        </ul>
+
+        <!--Modal-->
+        <!--adds dialogs to site for lightboxes, user notifications, or custom content -->
+        
+        <!--Live Demo-->
+        <button type="button" class="btn" data-toggle="modal" data-target="#modal">
+            ...
+        </button>
+        
+        <!--data-backdrop=static prevents modal from closing when clicking outside it-->
+        <div class="modal fade" id="#modal" (data-backdrop="static") tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog (modal-dialog-scrollable/centered) (modal-(sm/lg/xl))" role="document"> <!--to create modal with a scrollable body-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="">...</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!--can use grid system within modal by nesting .container-fluid-->
+                        <div class="container-fluid"></div>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+
+        <!--Navs-->
+        <!--.flex-column vertically stacks navigation-->
+        <!--.flex provides greater customization across responsive breakpoints-->
+        <ul class="nav (nav-(tabs/pills)) (flex-column) (justify-content-(center/end))">
+            <li class="nav-item">
+                <a class="nav-link (active/disabled)">...</a>
+            </li>
+        </ul>
+        <!--use .nav-fill to fill all available space with .nav-items-->
+        <!--use .nav-justified for equal-width elements-->
+        <nav class="nav (nav-(fill/justified)) (flex-column)"> <!--for vertical alignment-->
+            <a class="(nav-item) nav-link (active/disabled)" href=""></a> <!--use .nav-item when using <nav>-->
+        </nav>
+
+        <!--Navs w/ Dropdowns-->
+        <ul class="nav nav-(pills/tabs)">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href=""></a>
+                </div>
+            </li>
+        </ul>
+
+        <!--Tabbale panes w/ JS plugin-->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="...-tab" data-toggle="tab" href="" role="tab" aria-controls="" aria-selected="true"></a>
+            </li>
+        </ul>
+        <!--can use <nav> but need to put role="tablist" in a separate element-->
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                ...
+            </div>
+        </nav>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="..." role="tabpanel" aria-labelledby="(id_name)-tab"></div> 
+        </div>
+
+        <!--Navbar-->
+        <!--.sticky-top navbar sticks to top of scrollable page-->
+        <!--.navbar-expand-(breakpoints) expands to show entire contents of navbar at certain responsive breakpoints
+            or only shows the brand and toggle button at breakpoints under-->
+        <nav class="navbar (fixed-(top/bottom)/sticky-top) (navbar-(light/dark)) (bg-(primary, etc.)) (navbar-expand-(sm/md/lg/xl))">
+        <!--Immediate children of .navbar use flex layout and will use justify-content: space-between by default-->
+            <!--As a link w/ image and text:-->
+            <a class="navbar-brand" href="">
+                <img src="" class="d-inline-block align-top" width="" height="" alt="">
+                Navbar
+            </a>
+            <!--As a heading:-->
+            <span class="navbar-brand">Navbar</span>
+            <!--Text-->
+            <span class="navbar-text">
+                ...
+            </span>
+            <!--Forms-->
+            <form class="form-inline">
+                <input class="form-control" type="search" placeholder="Search" aria-label="search">
+                <button class="btn" type="submit"></button>
+            </form>
+            <!--Nav toggle button-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--Nav items-->
+            <div class="collapse navbar-collapse" id="">
+                <a class="nav-item nav-link (active/disabled)" href=""></a>
+                <div class="nav-item dropdown">
+                    <a class="nav-item nav-link dropdown-toggle" href="" id="" role="button" data-toggle="dropdown" aria-haspoup="true" aria-expanded="false"></a>                
+                    <div class="dropdown-menu" aria-laelledby="id_name">
+                        <a class="dropdown-item" href=""></a>
+                    </div>
+                </div>
+            </div>
+        
+        </nav>
+        
+        <!--Pagination-->
+        <!--use aria-label to provide explanation for purpose when more than one navigation section exists-->
+        <nav aria-label="page navigation example">
+            <ul class="pagination (pagination-(sm/lg)) (justify-content(center/end))">
+                <!--Icons-->
+                <li class="page-item (active/disabled)">
+                    <a class="page-link" href="" aria-label="previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item"><a class="page-link" href="">Previous</a></li>
+            </ul>
+        </nav>
+
+        <!--Popovers-->
+        <!--can add popovers, found in iOS, to any element-->
+        <!--requires Popper.js-->
+
+        <!--enabling popovers everywhere:
+            $(function(){
+                $('[data-toggle="popover"]').popover()
+            })-->
+
+        <!--separating differing styles between parent and popover element:
+            $(function(){
+                $('.example-popover').popover({
+                    container: 'body'
+                })
+            })-->
+        
+        <button type="button" class="btn" data-toggle="popover" data-placement="top/bottom/left/right" title="Popover title" data-content="...">Click to toggle</button>
+        
+        <!--Dismissible popover-->
+        <!--use <a> for proper cross-browswer and platform behavior-->
+        <a tabindex="0" class="btn" role="button" data-toggle="popover" data-trigger="focus" title="..." data-content="">Dismissible popover</a>
+        
+        <!--Disabled elements-->
+        <!--trigger popover from a wrapper <div> or <span> to override pointer-events on disabled element-->
+        <span class="d-inline-block" data-toggle="popover" data-content="...">
+            <button class="btn" style="pointer-events: none;" type="button" disabled>Disabled button</button>
+        </span>
+
+        <!--Progress bars-->
+        <!--use .progress as wrapper to indicate max value of bar-->
+        <div class="progress" style="height: 1px"> 
+        <!--can include multiple progress bars-->
+            <!--use .progress-bar to indicate progress-->
+            <div class="progress-bar (bg-(success/info/warning/danger))" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">label name (ex. 0%)</div>
+            <div class="progress-bar (progress-bar-striped) (progress-bar-animated) (w-(num))" role="progressbar" (style="width: 25%") aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        <!--Scrollspy-->
+        <!--automatically updates Bootstrap navigation/list group based on scroll position-->
+        <!--indicates which link is currently active in viewport-->
+
+        <!--Nav-->
+        <nav id="..." class="navbar">
+            <a class="navbar-brand" href="">Navbar</a>
+            
+            <!--Nested nav-->
+            <nav class="nav flex-column">
+                <a class="nav-link" href="#nav-item_name">nav-item_name</a>
+                <nav class="nav flex-column">
+                    <a class="nav-link" href="...">...</a>
+                </nav>
+            </nav>
+
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#nav-item_id">nav_name</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#dropdown-item_name">name</a>
+                    </div>
+                </li>
+            </ul>
+        </nav> 
+        <div data-spy="scroll" data-target="#nav_id" data-offset="0">
+            <h4 id="nav-item_id">nav-item_name</h4>
+        </div>
+
+        <!--List group-->
+        <div id="" class="list-group">
+            <a class="list-group-item list-group-item-action" href="list-group-item_id">item_name</a>
+        </div>
+        <div data-spy="scroll" data-target="list_group_id" data-offset="0" class="...">
+            <h4 id="...">item_name</h4>
+        </div>
+
+        <!--Spinners-->
+        <!--indicates loading state of component/page using Bootstrap spinners-->
+
+        <!--use wrapper element for placement-->
+        <!--use .clearfix on parent element to clear floated contents-->
+        <div class= " (text-center) (clearfix) d-flex justify-content-(center/end) (align-items-(center/bottom))">
+            <!--can change size by using custom CSS or inline styles-->
+            <div class="spinner-border (spinner-(border/grow)-(sm/lg)) (float-(right/center)) (spinner-grow) (text-(primary, etc.))" (style="width: ;height: ") role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <!--Buttons-->
+        <button class="btn" type="button">
+            <span class="spinner-(border/grow)" role="status" aria-hidden="true"></span>
+            ...
+        </button>
+
+        <!--Toasts-->
+        <!--lightweight and easily customizable alert message that can be pushed as notifications-->
+        <!--are slightly translucent-->
+        <!--vertically stack when there are multiple-->
+        
+        <!--put positioning styles on wrapper elements if showing more than one toast
+            else put it on the .toast element-->
+        <!--use flexbox container to vertically/horizontally align toasts-->
+        <!--use assertive:alert for important messages (ex. errors) and polite:status for others -->
+        <div (aria-live="polite" role="status") aria-atomic="true" (class="d-flex justify-content-center align-items-center") style="position: relative; min-height:200px">
+            <!--use .data-delay to give users enough time to read toast when displayed content changes -->
+            <!--must add button to close toast when using auto-hide: false-->
+            <div class="toast" style="position: absolute; top:0; right:0;" (role="alert" aria-live="assertive") aria-atomic="true" (data-delay:num) (auto-hide: false)>
+                <div class="toast-header">
+                    ...
+                    <button type="button" class="close" data-dismiss="toast" aria-label="close"></button>
+                </div>
+                <div class="toast-body">
+                    ...
+                </div> 
+            </div>
+        </div>
+
+        <!--Tooltips-->
+        <!--uses Popper.js for positioning-->
+
+        <button type="button" class="btn" data-toggle="tooltip" data-placement="top/right/bottom/left" title="..."></button>
+        
+        <!--w/ custom HTML added-->
+        <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="<em>Tooltip</em> ..."></button>
+
+        <!--Disabled elements-->
+        <!--use wrapper <div>/<span> and override pointer-events on disabled element-->
+        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="disabled tooltip">
+            <button class="btn" style="pointer-events:none;" type="button" disabled>Disabled button</button>
+        </span>
+
+
+    </body>
