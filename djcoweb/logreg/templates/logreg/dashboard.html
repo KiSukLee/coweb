@@ -1,8 +1,80 @@
-<h1>Hello {{request.session.name}}!</h1>
-<nav>
-    <h3><a href="/estore/about">About</a></h3>
-    <h3><a href="/estore/products">Products</a></h3>
-    <h3><a href="/estore/cart">Cart</a></h3>
-    <h3><a href="/logout">Logout</a></h3>
-    
-</nav>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Dashboard</title>
+        
+        <link rel="stylesheet" href="">
+        <!-- load Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5
+        KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4
+        Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <!--Custom Bootstrap classes-->
+        {% load static %}
+        <link href="{% static 'css/estore/custom_bs.css' %}" rel="stylesheet">
+        <script src=""></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <nav class="navbar sticky-top navbar-expand-md px-2" style="background-color: aqua;">
+                <a class="navbar-brand text-decoration-none" href="/estore/about">
+                    <img src="" class="d-inline-block align-top " width="" height="" alt="co_logo" >
+                    Aqua Lash & CO
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dash_nav" aria-controls="#dash_nav" aria-expanded="false" aria-label="toggle nav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-around" id="dash_nav">    
+                    <a class="nav-link my-1" href="/estore/about">About</a>
+                    <a class="nav-link my-1 disabled" href="/dashboard"><strong>Dashboard</strong></a>
+                    <a class="nav-link my-1" href="/estore/products">Products</a>
+                    <a class="nav-link my-1" href="/estore/cart">Cart</a>
+                    <a class="nav-link my-1" href="/logout">Logout</a> 
+                </div> 
+            </nav>
+            <div class="row display-4 justify-content-center my-2">
+                Hello {{request.session.name}}!
+            </div>
+            <div id="dash_slide" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner bg-success">
+                    {% load static %}
+                    <div class="carousel-item embed-responsive-item active">
+                        <img src="{% static 'images/estore/vegetables-background.jpg' %}" class="d-block w-100 object-fit-cover" height="300px" alt="first">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>First slide label</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'images/estore/vegetables-background.jpg' %}" class="d-block w-100 object-fit-cover" height="300px" alt="second">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Second slide label</h5>
+                        </div>
+                    </div> 
+                    <div class="carousel-item">
+                        <img src="{% static 'images/estore/vegetables-background.jpg' %}" class="d-block w-100 object-fit-cover" height="300px" alt="third">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Third slide label</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#dash_slide" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#dash_slide" data-bs-slide-to="1" class="Slide 2"></button>
+                    <button type="button" data-bs-target="#dash_slide" data-bs-slide-to="2" class="Slide 3"></button>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

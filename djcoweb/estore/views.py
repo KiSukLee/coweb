@@ -78,5 +78,7 @@ def cart(request):
         prods.append(prod)
     print(prods)
     return render(request, "estore/cart.html", context = {"prods":prods, "total":cart.total})
+
 def checkout(request):
+    return 
     
