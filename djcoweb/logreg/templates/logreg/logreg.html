@@ -1,123 +1,34 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Login/Registration</title>
         
-        <link rel="stylesheet" href="">
-        <!-- load Bootstrap -->
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5
-        KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4
-        Q" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl
-        " crossorigin="anonymous"></script>
-
-        <script src=""></script>
     </head>
     <body>
-        <div class="overflow-auto">
-            {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
+        <h1>New Member</h1>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action= "validate" method='post'>
+            {% csrf_token %}
+            Name: <input type="text" name="name">
+            Email: <input type="text" name="email">
+            Phone Number: <input type="int" name="number">
+            Password: <input type="text" name="pword">
+            <input type="hidden" name="form" value="create">
+            <button type="submit">Submit</button>
+        </form>
 
-            <div class="container-fluid bg-secondary">
-                <div class="text-center display-4 mb-1">New Member</div>
-                <form class="form row row-cols-lg-4 row-cols-sm-2" action= "validate" method='post'>
-                    {% csrf_token %}
-                    <div class="form-group col p-2 mb-2 mr-1 bg-success">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="First and Last">
-                    </div>
-                    <div class="form-group col p-2 mb-2 bg-success">
-                        <label for="email">Email:</label>
-                        <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="example@gmail.com">
-                    </div>
-                    <div class="form-group col p-2 mb-2 bg-success">
-                        <label for="number">Number:</label>
-                        <input type="text" class="form-control form-control-sm" id="number" name="number" placeholder="(XXX)-XXX-XXXX">
-                    </div>
-                    <div class="form-group col p-2 mb-2 bg-success">
-                        <label for="pword">Password:</label>
-                        <input type="text" class="form-control form-control-sm" id="pword" name="pword">
-                    </div>
-                    <input type="hidden" name="form" value="create">
-                    <div class="w-100"></div>
-                    <button class="btn btn-primary mx-auto mb-2" type="submit">Submit</button>
-                </form>
-            </div>
-            <div class="container-fluid" style="background-color:lightskyblue;">
-                <div class="text-center display-4 mb-2">Returning Member</div>
-                <form class="form justify-content-center row row-cols-lg-4 row-cols-sm-2" action="validate" method='post'>
-                    {% csrf_token %}
-                    <div class="form-group col mb-2">
-                        <label for="email">Email:</label> 
-                        <input type="text" class="form-control form-control-sm" id="email" name="email" placeholder="User Email">
-                    </div>
-                    <div class="form-group col mb-2">
-                        <label for="pword">Password:</label> 
-                        <input type="text" class="form-control form-control-sm" id="pword" name="pword" placeholder="User Password">
-                    </div>
-                    <input type="hidden" name="form" value="match">
-                    <div class="w-100"></div>
-                    <button class="btn btn-primary mx-auto mb-2" type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
+        <h1>Returning Member</h1>
+        <form action="validate" method='post'>
+            {% csrf_token %}
+            Email: <input type="text" name="email">
+            Password: <input type="text" name="pword">
+            <input type="hidden" name="form" value="match">
+            <button type="submit">Submit</button>
+        </form>
     </body>
 </html>
-
-<!--Additional form input types:
-    Select one from variety of options
-    
-    <label for="male">Male</label>
-    <input type="radio" id="male" name="gender" value="male">
-
-    dropdown menu 
-
-    <select name="gender">
-        <option value="male">Male</option>
-    </select>
-
-    checkboxes
-
-    <label for="male">Male</label>
-    <input type="checkbox" id="male" name="gender" value="male">
-
-    longer text
-
-    <textarea name="description"></textarea>
-
-    other label-input declaration (input is nested inside label)
-
-    <label>
-        Gender:<input type="radio" name="gender" value="male">
-    </label>
-
-    Audio
-
-    <audio controls>
-        <source src="name.ogg">
-        <source src="name.mp3">
-    </audio>
-
-    Video
-
-    <video width="" heigth="" poster="thumbnail_picture.jpg" controls>
-        <source src="name.ogv">
-        <source src="name.mp4">
-    </video>
---> 
