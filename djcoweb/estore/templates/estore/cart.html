@@ -35,7 +35,7 @@
         {% endif %}
         <div class="container-fluid">
             <nav class="navbar sticky-top navbar-expand-md px-2" style="background-color: aqua;">
-                <a class="navbar-brand text-decoration-none" href="/estore/about">
+                <a class="navbar-brand text-decoration-none" href="/">
                     <img src="" class="d-inline-block align-top " width="" height="" alt="co_logo" >
                     Aqua Lash & CO
                 </a>
@@ -43,25 +43,25 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-around" id="dash_nav">    
-                    <a class="nav-link my-1" href="/estore/about">About</a>
-                    <a class="nav-link my-1" href="/dashboard">Dashboard</a>
-                    <a class="nav-link my-1" href="/estore/products">Products</a>
-                    <a class="nav-link my-1 disabled" href="/estore/cart"><strong>Cart</strong></a>
-                    <a class="nav-link my-1" href="/logout">Logout</a> 
+                    <a class="nav-link my-1" href="/">About</a>
+                    <a class="nav-link my-1" href="/products">Products</a>
+                    <a class="nav-link my-1 disabled" href="/cart"><strong>Cart</strong></a>
+                    <a class="nav-link my-1" href="/logreg/dashboard">Dashboard</a>
+                    <a class="nav-link my-1" href="/logreg/logout">Logout</a> 
                 </div> 
             </nav>
             
             <div class="row display-4 justify-content-center my-1">Cart</div>
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4"></div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                 {% for prod in prods %}
                 <div class="col-6 col-md-4 col-lg-3 mb-2">
                     <div class="card text-center">    
                         <img src="{% static 'images/estore/vegetables-background.jpg' %}" class="card-img-top" alt="">
                         <div class="card-body">
                             <div class="card-title">{{prod.name}} {{prod.price}} x {{prod.quantity}}</div>
-                            <button class="btn btn-primary"><a class="text-decoration-none text-white" href= "cart/add/{{prod.prod_id}}">Add</a></button>
-                            <button class="btn btn-primary"><a class="text-decoration-none text-white" href="cart/remove/{{prod.prod_id}}">Remove</a></button>
+                            <button class="btn btn-primary"><a class="text-decoration-none text-white" href= "/cart/add/{{prod.prod_id}}">Add</a></button>
+                            <button class="btn btn-primary"><a class="text-decoration-none text-white" href="/cart/remove/{{prod.prod_id}}">Remove</a></button>
                         </div>
                     </div>
                 </div>

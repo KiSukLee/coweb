@@ -5,15 +5,23 @@ from . models import Product, Cart, User, Inventory
 # Create your views here.
 
 def about(request):
-    return render(request, "estore/info.html")
+    try:
+        name = request.session['name']
+    except:
+        name = False
+    return render(request, "estore/info.html", {"name": name})
 
 def products(request):
-    return render(request, "estore/inventory.html", {"products":Inventory.objects.all()})
+    try:
+        name = request.session['name']
+    except:
+        name = False
+    return render(request, "estore/inventory.html", {"products":Inventory.objects.all(), "name": name})
 
 def prod_cart(method):
     if method == "products":
-        return redirect("/estore/products")
-    return redirect("/estore/cart")
+        return redirect("/products")
+    return redirect("/cart")
 
 def modify_cart(request, method, action, product_id):
     inventory = Inventory.objects.get(id = product_id)

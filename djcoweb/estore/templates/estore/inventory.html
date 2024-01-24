@@ -11,9 +11,7 @@
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5
-        KkN" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4
         Q" crossorigin="anonymous"></script>
@@ -27,9 +25,10 @@
     </head>
     <body>
         {% load static %}
+
         <div class="container-fluid">
             <nav class="navbar sticky-top navbar-expand-md px-2" style="background-color: aqua;">
-                <a class="navbar-brand text-decoration-none" href="/estore/about">
+                <a class="navbar-brand text-decoration-none" href="/">
                     <img src="" class="d-inline-block align-top " width="" height="" alt="co_logo" >
                     Aqua Lash & CO
                 </a>
@@ -37,22 +36,29 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-around" id="dash_nav">    
-                    <a class="nav-link my-1" href="/estore/about">About</a>
-                    <a class="nav-link my-1" href="/dashboard">Dashboard</a>
-                    <a class="nav-link my-1 disabled" href="/estore/products"><strong>Products</strong></a>
-                    <a class="nav-link my-1" href="/estore/cart">Cart</a>
-                    <a class="nav-link my-1" href="/logout">Logout</a> 
+                    <a class="nav-link my-1" href="/">About</a>
+                    <a class="nav-link my-1 disabled" href="/products"><strong>Products</strong></a>
+                    {% if not name %}
+                        <a class="nav-link my-1" href="/logreg/logreg">Login/Create</a>
+                    {% else %}
+                        <a class="nav-link my-1" href="/cart">Cart</a>
+                        <a class="nav-link my-1" href="/logreg/dashboard">Dashboard</a>
+                        <a class="nav-link my-1" href="/logreg/logout">Logout</a>
+                    {% endif %} 
                 </div> 
             </nav>
-            <div class="row display-4 justify-content-center">Products</div>
 
             {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
-                {% endfor %}
-            </ul>
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        <div {% if message.tags %} class="{{message.tags}} text-center"{% endif %}><strong>{{message}}</strong></div>
+                    </div>
+                    {% endfor %}
+                </div>
             {% endif %}
+
+            <div class="row display-4 justify-content-center">Products</div>
             
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                 {% for product in products %}
@@ -66,8 +72,14 @@
                                     <p>Price: {{product.price}}</p>
                                     <p>Quantity: {{product.quantity}}</p>
                                 </div>
-                                <button class="btn btn-primary"><a class="text-white text-decoration-none" href= "products/add/{{product.id}}">Add</a></button>
-                                <button class="btn btn-primary"><a class="text-white text-decoration-none" href="products/remove/{{product.id}}">Remove</a></button>
+                                {% if not name %}
+                                <div class="d-none">
+                                {% endif %}
+                                    <button class="btn btn-primary"><a class="text-white text-decoration-none" href= "/products/add/{{product.id}}">Add</a></button>
+                                    <button class="btn btn-primary"><a class="text-white text-decoration-none" href="/products/remove/{{product.id}}">Remove</a></button>
+                                {% if not name %}
+                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
