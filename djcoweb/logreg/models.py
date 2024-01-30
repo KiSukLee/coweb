@@ -19,11 +19,11 @@ class UserManager(models.Manager):
                 errors['pword'] = 'Password must be at least 8 characters'
             return errors
         else:
-            if not User.objects.filter(email = postData['email']):
-                errors['email'] = "User does not exist"
+            if not User.objects.filter(email = postData['lemail']):
+                errors['lemail'] = "User does not exist"
                 return errors
-            if not bcrypt.checkpw(postData['pword'].encode(), User.objects.get(email = postData['email']).password.encode()):
-                errors['pword'] = "Incorrect password"
+            if not bcrypt.checkpw(postData['lpword'].encode(), User.objects.get(email = postData['lemail']).password.encode()):
+                errors['lpword'] = "Incorrect password"
             return errors
 class User(models.Model):
     name = models.CharField(max_length = 50)

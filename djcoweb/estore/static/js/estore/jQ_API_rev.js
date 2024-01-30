@@ -1,7 +1,33 @@
+//jQuery - JavaScript library which provides cross-browser compatibility
+    //Effects
+        //.hide(), .show(), .toggle(), .slideUp(), .slideDown(), .slideToggle(), .fadeOut(), .fadeIn()
+    //CSS
+        //.addClass(), .removeClass(), .css()
+    //Manipulation
+        //.after(), .append(), .prepend(), .attr(), .before(), .html(), .text(), .val()
+    //Events 
+        //.click(), .hover()
+        
+    //for Forms
+    //.submit() - can be used as an event handler or as an eventof a form being submitted
 
-//use callbacks to attach handlers to dynamically generated elements
-//can achieve this by restating the code for the new content after its creation
-//or by creating functions and calling on them to avoid redundancy
+    $('form').submit(function(){
+        alert("you submitted me!");
+    })
+
+    //return false
+    //can prevent form from being submitted by just returning false
+
+    $('form').submit(function(){
+        return false;
+    })
+
+    //.serialize() - encodes a set of form elements into computer-friendly array
+    //transforms data that user inputs into format that can easily be passed to a back-end process
+
+    //use callbacks to attach handlers to dynamically generated elements
+    //can achieve this by restating the code for the new content after its creation
+    //or by creating functions and calling on them to avoid redundancy
 
 //AJAX (Asynchronous JavaScript and XML) - front-end JavaScript that allows page
 //to interact with database without freshing the page (useful for forms)
@@ -74,19 +100,3 @@
 
 
 
-//jQuery for Forms
-    //.submit() - can be used as an event handler or as an eventof a form being submitted
-
-    $('form').submit(function(){
-        alert("you submitted me!");
-    })
-
-    //return false
-    //can prevent form from being submitted by just returning false
-
-    $('form').submit(function(){
-        return false;
-    })
-
-    //.serialize() - encodes a set of form elements into computer-friendly array
-    //transforms data that user inputs into format that can easily be passed to a back-end process
