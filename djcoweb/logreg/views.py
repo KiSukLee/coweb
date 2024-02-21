@@ -18,7 +18,9 @@ def validate(request):
     if request.POST['form'] == 'create':
         user = User.objects.create(name=request.POST['name'], email=request.POST['email'], number=request.POST['number'], password=bcrypt.hashpw(request.POST['pword'].encode(), bcrypt.gensalt()).decode())
         Cart.objects.create(user = user, total = 0)
-    request.session['name'] = User.objects.get(email = request.POST['lemail']).name
+        request.session['name'] = User.objects.get(email = request.POST['email']).name
+    else:
+        request.session['name'] = User.objects.get(email = request.POST['lemail']).name
     request.session['cart_id'] = Cart.objects.filter(user = User.objects.get(name = request.session["name"])).last().id
     return redirect('/logreg/dashboard')
 def dashboard(request):

@@ -27,18 +27,19 @@ def modify_cart(request, method, action, product_id):
     inventory = Inventory.objects.get(id = product_id)
     this_user = User.objects.get(email = User.objects.get(name = request.session['name']).email)
     this_cart = Cart.objects.get(id = request.session["cart_id"], user = this_user)
-    print(this_cart.user.name)
-    print(this_cart.id)
     data = {}
+    
+    #based on which template sent the fetch request, values and methods used change accordingly
     if method == 'product':
         formData = 1
         this_product = this_cart.products.filter(product_id = product_id)
     else:
         this_product = this_cart.products.get(product_id = product_id)
         formData = request.POST['quantity']
-    print(formData)
+
     if formData == "Quantity":
         return JsonResponse(data)
+    
     #Add to Cart
     if action == "add":
         if not inventory.quantity > 0 or int(formData) > inventory.quantity:
@@ -66,7 +67,7 @@ def modify_cart(request, method, action, product_id):
     #Remove from Cart
     else:
         if not this_product or this_product.quantity < int(formData):
-            data['error'] = "Insufficient amount"
+            data['error'] = "Insufficient amount in cart"
             return JsonResponse(data)
         this_product.quantity -= int(formData)
         this_product.save()
@@ -81,6 +82,7 @@ def modify_cart(request, method, action, product_id):
         inventory.quantity += int(formData)
         inventory.save()
     
+    #Send data to fetch request
     data = {"name":inventory.name, "price":inventory.price}
     if method == 'product':
         data["quantity"] = inventory.quantity
@@ -88,6 +90,7 @@ def modify_cart(request, method, action, product_id):
         data["quantity"] = this_product.quantity
         data["total"] = this_cart.total
     return JsonResponse(data)
+
 def cart(request):
     cart = Cart.objects.get(id = request.session['cart_id'])
     products = cart.products.all()
@@ -101,6 +104,7 @@ def cart(request):
         }
         prods.append(prod)
     return render(request, "estore/cart.html", context = {"prods":prods, "total":cart.total})
+
 def checkout(request):
     return 
     
