@@ -5,14 +5,15 @@ from django.db import models
 class UserManager(models.Manager):
     def validate(self, postData):
         errors = {}
-        if postData['form'] == 'create':
+        if postData['form'] != 'match':
             if len(postData['name']) <= 3:
                 errors["name"] = 'Name must be at least 3 characters long'
             EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-            if not EMAIL_REGEX.match(postData['email']):
-                errors['email'] = 'Invalid email'
-            if User.objects.filter(email = postData['email']):
-                errors['email'] = "Already have an existing account"
+            if postData['form'] == 'create':
+                if not EMAIL_REGEX.match(postData['email']):
+                    errors['email'] = 'Invalid email'
+                if User.objects.filter(email = postData['email']):
+                    errors['email'] = "Already have an existing account"
             if len(postData['number']) != 10:
                 errors['number'] = 'Invalid phone number'
             if len(postData['pword']) < 8:

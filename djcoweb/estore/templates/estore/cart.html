@@ -31,8 +31,9 @@
                 <div class="collapse navbar-collapse justify-content-around" id="dash_nav">    
                     <a class="nav-link my-1" href="/">About</a>
                     <a class="nav-link my-1" href="/products">Products</a>
-                    <a class="nav-link my-1 disabled" href="/cart"><strong>Cart</strong></a>
+                    <a class="nav-link my-1 disabled" href="/cart/curr"><strong>Cart</strong></a>
                     <a class="nav-link my-1" href="/logreg/dashboard">Dashboard</a>
+                    <a class="nav-link my-1" href="/logreg/account">Account</a>
                     <a class="nav-link my-1" href="/logreg/logout">Logout</a> 
                 </div> 
             </nav>
@@ -91,7 +92,7 @@
 
             <div class="sticky-bottom" style="background-color: aqua;">
                 <div id="cart_tot" class="display-4 text-center">Total: {{total}}</div>
-                <btn class="btn btn-primary w-100 mb-2"><a class="text-decoration-none text-white" href="/estore/checkout">Proceed to Checkout</a></btn>
+                <btn class="btn btn-primary w-100 mb-2"><a class="text-decoration-none text-white" href="/cart/checkout">Proceed to Checkout</a></btn>
             </div>
 
         </div>

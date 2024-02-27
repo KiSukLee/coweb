@@ -18,11 +18,6 @@ def products(request):
         name = False
     return render(request, "estore/inventory.html", {"products":Inventory.objects.all(), "name": name})
 
-#def prod_cart(method):
-    if method == "products":
-        return redirect("/products")
-    return redirect("/cart")
-
 def modify_cart(request, method, action, product_id):
     inventory = Inventory.objects.get(id = product_id)
     this_user = User.objects.get(email = User.objects.get(name = request.session['name']).email)
@@ -91,7 +86,7 @@ def modify_cart(request, method, action, product_id):
         data["total"] = this_cart.total
     return JsonResponse(data)
 
-def cart(request):
+def cart(request, method):
     cart = Cart.objects.get(id = request.session['cart_id'])
     products = cart.products.all()
     prods = []
@@ -103,8 +98,14 @@ def cart(request):
             "quantity":product.quantity
         }
         prods.append(prod)
+    if method == "checkout":
+        return render(request, "estore/checkout.html", context = {"prods":prods, "total":cart.total})
     return render(request, "estore/cart.html", context = {"prods":prods, "total":cart.total})
 
-def checkout(request):
-    return 
+
     
+#curl -v -X POST "https://api-m.sandbox.paypal.com/v1/oauth2/token"\
+# -u "AcBafemIl_XatSuGWN8GlpMDuiGYJ3rUL2oeZkAxezPdIfk9LZcdwU41Ye1Ght08KOsQjnVakDt66PRn:EB5uN9Gwi-YhQmomkaDaJFao5DfEOvBiXQF5NICptk512y9dJkNOfi4TjTB4pjjrVDGOXl9FIALzU_EG"\
+# -H "Content-Type: application/x-www-form-urlencoded"\
+# -d "grant_type=client_credentials"
+      
